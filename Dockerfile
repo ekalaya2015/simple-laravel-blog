@@ -8,18 +8,18 @@ COPY composer.lock composer.json /var/www/html
 WORKDIR /var/www/html
 
 # Install dependencies
-RUN apt-get update
-RUN apt-get install freetype-dev
-RUN apt-get install libjpeg-turbo-dev
-RUN apt-get install libpng-dev
-RUN apt-get install libzip-dev
-RUN apt-get install zlib-dev
-RUN apt-get install ghostscript
-RUN apt-get install busybox-extras
-RUN apt-get install nano
-RUN apt-get install curl
-RUN apt-get install libxml2 libxslt-dev
-RUN apt-get install jpeg-dev libpng-dev
+RUN apt-get update -y
+RUN apt-get install freetype-dev -y
+RUN apt-get install libjpeg-turbo-dev -y
+RUN apt-get install libpng-dev -y
+RUN apt-get install libzip-dev -y
+RUN apt-get install zlib-dev -y
+RUN apt-get install ghostscript -y
+RUN apt-get install busybox-extras -y
+RUN apt-get install nano -y
+RUN apt-get install curl -y
+RUN apt-get install libxml2 libxslt-dev -y
+RUN apt-get install jpeg-dev libpng-dev -y
 
 # COPY ./docker/php/config/php.ini /usr/local/etc/php
 
