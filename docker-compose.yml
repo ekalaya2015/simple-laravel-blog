@@ -35,7 +35,7 @@ services:
   #     - laravel9
 
   php:
-    image: public.ecr.aws/b5x7u7t9/infokes-ecr-pub
+    image: public.ecr.aws/b5x7u7t9/infokes-ecr-pub:simpleblog
     container_name: laravel9_php
     volumes:
       - ./:/var/www/html
