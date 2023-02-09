@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine3.13
+FROM php:8.0-fpm
 
 WORKDIR /var/www/html
 
@@ -26,9 +26,14 @@ RUN docker-php-ext-install pdo pdo_mysql gd zip soap
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN composer install
+
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
 COPY . /var/www/html
 COPY --chown=www:www . /var/www/html
 
-RUN composer install
+USER www
 EXPOSE 9000
 CMD ["php-fpm"]
