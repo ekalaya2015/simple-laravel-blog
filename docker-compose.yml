@@ -6,7 +6,8 @@ services:
     image: nginx:stable-alpine
     container_name: laravel_blog_nginx
     ports:
-      - "8001:80"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./:/var/www/html
       - /var/www/html/vendor
@@ -36,14 +37,14 @@ services:
 
   php:
     image: public.ecr.aws/b5x7u7t9/infokes-ecr-pub:simpleblog
-    container_name: laravel9_php
+    container_name: simpleblog
     volumes:
       - ./:/var/www/html
       - /var/www/html/vendor
 
       # - ./docker/php/config:/usr/local/etc/php
     ports:
-      - "9004:9000"
+      - "9000:9000"
   
 
   # laravel_blog_mysql:
