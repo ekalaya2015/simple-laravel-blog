@@ -9,8 +9,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./:/var/www/html
-      - /var/www/html/vendor
+      # - ./:/var/www/html
+      # - /var/www/html/vendor
       - ./default.conf:/etc/nginx/conf.d/default.conf
       # - ./home/webwerks/secure_storage:/secure_storage
     depends_on:
@@ -38,9 +38,9 @@ services:
   php:
     image: public.ecr.aws/b5x7u7t9/infokes-ecr-pub:simpleblog
     container_name: simpleblog
-    volumes:
-      - ./:/var/www/html
-      - /var/www/html/vendor
+    # volumes:
+    #   - ./:/var/www/html
+    #   - /var/www/html/vendor
 
       # - ./docker/php/config:/usr/local/etc/php
     ports:
