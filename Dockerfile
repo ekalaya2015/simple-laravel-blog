@@ -2,24 +2,33 @@ FROM php:8.0-fpm
 
 WORKDIR /var/www/html
 
-RUN apk update
+COPY composer.lock composer.json /var/www/html
 
-RUN apk add freetype-dev
-RUN apk add libjpeg-turbo-dev
-RUN apk add libpng-dev
-RUN apk add libzip-dev
-RUN apk add zlib-dev
-RUN apk add ghostscript
-RUN apk add busybox-extras
-RUN apk add nano
-RUN apk add curl
-RUN apk add libxml2 libxslt-dev
-RUN apk add jpeg-dev libpng-dev
+# Set working directory
+WORKDIR /var/www/html
 
-# COPY ./docker/php/config/php.ini /usr/local/etc/php
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libzip-dev
 
-RUN docker-php-ext-configure gd --with-jpeg
-RUN docker-php-ext-install pdo pdo_mysql gd zip soap
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-install gd
 
 
 
