@@ -36,7 +36,7 @@ services:
   #     - laravel9
 
   php:
-    image: simpleblog:latest #public.ecr.aws/b5x7u7t9/infokes-ecr-pub:simpleblog
+    image: public.ecr.aws/b5x7u7t9/infokes-ecr-pub:simpleblog
     container_name: simpleblog
     # volumes:
     #   - ./:/var/www/html
@@ -45,26 +45,26 @@ services:
       # - ./docker/php/config:/usr/local/etc/php
     # command: php artisan serve --host=0.0.0.0 --port=9000  
     ports:
-      - "8008:8000"
+      - "80:8000"
   
 
-  laravel_blog_mysql:
-    image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: homestead
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    # ports:
-    #   - 3306:3306
-    volumes:
-      - laravel_blog_db_data:/var/lib/mysql
+  # laravel_blog_mysql:
+  #   image: mysql:latest
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpassword
+  #     MYSQL_USER: homestead
+  #     MYSQL_PASSWORD: homestead
+  #     SERVICE_TAGS: dev
+  #     SERVICE_NAME: mysql
+  #   # ports:
+  #   #   - 3306:3306
+  #   volumes:
+  #     - laravel_blog_db_data:/var/lib/mysql
   adminer_laravel_blog:
     image: adminer:latest
     environment:
-      ADMINER_DEFAULT_SERVER: laravel_blog_mysql
+      ADMINER_DEFAULT_SERVER: database-1.cjdtqu90pal3.us-east-2.rds.amazonaws.com
     ports:
       - 8080:8080
 volumes:
